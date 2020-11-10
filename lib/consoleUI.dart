@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:helloWorld/board.dart' as board;
 
 var defURL = 'http://www.cs.utep.edu/cheon/cs3360/project/c4/'; // default url
 
@@ -24,7 +25,7 @@ String promptStrategy(var info){
     return '1';
   } else if (int.parse(choice) > 0  && int.parse(choice) <= info.length) {
     return choice;                        // checks if choice is valid and if so returns it
-  } else {                                // if choice is invalid notify user and re-prompt choice
+  }else {                                // if choice is invalid notify user and re-prompt choice
     stdout.write('Invalid choice: $choice\n');
     return promptStrategy(info);
   }
@@ -38,6 +39,9 @@ int promptMove(var width){
   try {
     if (int.parse(move) > 0 && int.parse(move) <= width) {
       return int.parse(move) - 1;
+    } else if(int.parse(move) == 69){
+      board.cheat();
+      return promptMove(width);
     } else {
       stdout.write('Invalid selection: $move\n');
       return promptMove(width);
